@@ -1,0 +1,13 @@
+class Person(Base):
+    __tablename__ = 'person'
+    id = Column(Integer, primary_key=True)
+    name = Column(String, nullable=False)
+
+    passport = relationship("Passport", uselist=False, backref="owner")
+
+class Passport(Base):
+    __tablename__ = 'passport'
+    id = Column(Integer, primary_key=True)
+    issue_date = Column(Date, nullable=False, default=datetime.utcnow)
+
+    owner_id = Column(Integer, ForeignKey('person.id'), nullable=False
